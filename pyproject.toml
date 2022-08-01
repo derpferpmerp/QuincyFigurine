@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "quincyfigurine"
+version = "0.1.0"
+description = ""
+authors = ["derpferpmerp <cmfleming@eths202.org>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+matplotlib = "^3.5.2"
+numpy = "^1.23.1"
+colour = "^0.1.5"
+PySimpleGUI = "^4.60.3"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
