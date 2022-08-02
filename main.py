@@ -84,7 +84,7 @@ class Figurine(object):
         sellback_value = self._calc_cost(rcurr)
         total_profit = sellback_value - original_cost
         profit_string = self._generate_profit_string(total_profit, rcurr)
-        self._display_profit(profit_string)
+        #self._display_profit(profit_string)
         return total_profit
 
 if __name__ == "__main__":

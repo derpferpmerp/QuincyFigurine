@@ -62,13 +62,15 @@ def recursivelyAdd(lyout, DCT, SLIDER_KEYS={}):
         ])
     return lyout, SLIDER_KEYS
 
-def addTitle(lyout, text, qsize=(10, 1), nunder=30):
+def addTitle(lyout, text, qsize=(10, 1), nunder=30, qkey="None"):
+    KEY = qkey+str(text) if qkey == "None" else qkey
     lyout.append([
         [sg.Text("_"*nunder)],
         [
             sg.Text(
                 text, size=qsize,
                 justification="center", font=TITLE_OBJECT("bold"),
+                key=KEY
             ),
         ],
         [sg.Text("\u00AF"*nunder)],
@@ -105,6 +107,8 @@ layout += [
 ]
 
 layout.append([sg.Button("Run Calculator")])
+layout = addTitle(layout, "Profit: $---", qsize=(30, 1), nunder=55, qkey="-Profit Value-")
+
 window = sg.Window(
     title="Figurine Calculator",
     layout=layout,
@@ -126,7 +130,12 @@ while True:
     if event == sg.WIN_CLOSED: break
     elif event == "Run Calculator":
         total_profit = generate(DATA)
-        
+        if window.Element("-Profit Value-") == None:
+            continue
+        profit_sign = "-" if total_profit < 0 else ""
+        prof_abs = abs(total_profit)
+        prof_INT = int(prof_abs) if DATA["ROUNDING_DIGITS"] == 0 else prof_abs
+        window.Element("-Profit Value-").Update(f"Profit: {profit_sign}${prof_INT}")
     elif event == "-Starting Round SLIDER-":
         MIN = values["-Starting Round SLIDER-"]
         DATA["STARTING_ROUND"] = int(MIN)
